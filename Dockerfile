@@ -8,5 +8,8 @@ COPY . /var/www/html
 
 RUN composer install --no-dev --optimize-autoloader
 
-# Run migrations at RUNTIME, not build time
-CMD php artisan migrate --force && php artisan config:cache && php artisan route:cache && /start.sh
+# Run migrations BEFORE caching config/routes
+RUN php artisan migrate --force
+
+RUN php artisan config:cache
+RUN php artisan route:cache
