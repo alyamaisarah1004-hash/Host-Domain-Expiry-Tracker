@@ -1,0 +1,815 @@
+/* ============================================
+   Dashboard — Neomorphic Theme
+   Cal Studio Expiry Tracker
+   ============================================ */
+
+:root {
+    --color-pink:   #F7CBCA;
+    --color-grey:   #C9BDBD;
+    --color-cream:  #F1F7F7;
+    --color-pale:   #D8E5E5;
+    --color-teal:   #B8D4D4;
+    --color-slate:  #5D6B6B;
+    --color-white:  #FFFFFF;
+
+    --color-bg-1:   #C8E0E0;
+    --color-bg-2:   #F5C9C7;
+    --color-bg-3:   #D9E8E8;
+
+    --shadow-light: rgba(255, 255, 255, 0.95);
+    --shadow-dark:  rgba(93, 107, 107, 0.18);
+
+    /* Sidebar width — single source of truth */
+    --sidebar-width: 260px;
+
+    /* ---------- Font tokens ---------- */
+    --font-base: 'Segoe UI', Tahoma, sans-serif;
+
+    /* buttons & interactive — Capitalize */
+    --font-button-family:     var(--font-base);
+    --font-button-weight:     600;
+    --font-button-size:       13px;
+    --font-button-spacing:    0.3px;
+    --font-button-transform:  capitalize;
+
+    /* card headings — UPPERCASE */
+    --font-card-heading-weight:    700;
+    --font-card-heading-size:      13px;
+    --font-card-heading-spacing:   1px;
+    --font-card-heading-transform: uppercase;
+
+    /* card labels — Capitalize */
+    --font-card-label-weight:    600;
+    --font-card-label-size:      11px;
+    --font-card-label-spacing:   0.4px;
+    --font-card-label-transform: capitalize;
+
+    /* card values */
+    --font-card-value-weight:    700;
+    --font-card-value-size:      34px;
+    --font-card-value-spacing:   0;
+
+    /* card body */
+    --font-card-body-weight:     400;
+    --font-card-body-size:       13px;
+    --font-card-body-spacing:    0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-base);
+    color: var(--color-slate);
+    background: linear-gradient(
+        135deg,
+        var(--color-bg-2) 0%,
+        var(--color-bg-3) 50%,
+        var(--color-bg-1) 100%
+    );
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* ============================================
+   Layout
+   ============================================ */
+
+.layout {
+    min-height: 100vh;
+}
+
+/* ============================================
+   Sidebar — FIXED to the left always
+   ============================================ */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--sidebar-width);
+
+    background: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    padding: 26px 18px;
+
+    overflow-y: auto;
+    z-index: 100;
+
+    box-shadow: 8px 0 24px rgba(93, 107, 107, 0.10);
+}
+
+.brand {
+    padding: 0 10px 22px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--color-pale);
+}
+
+.brand h2 {
+    font-family: var(--font-base);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: var(--color-slate);
+    text-transform: capitalize;
+}
+
+.brand span {
+    font-family: var(--font-base);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    color: var(--color-grey);
+    text-transform: capitalize;
+    margin-top: 2px;
+    display: block;
+}
+
+/* ----- Nav ----- */
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--color-slate);
+    font-family: var(--font-button-family);
+    font-size: var(--font-button-size);
+    font-weight: var(--font-button-weight);
+    letter-spacing: var(--font-button-spacing);
+    text-transform: var(--font-button-transform);
+    background: var(--color-white);
+    transition: box-shadow 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.nav-item svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    opacity: 0.75;
+}
+
+.nav-item:hover {
+    transform: translateX(3px);
+    box-shadow:
+        4px 4px 10px rgba(93, 107, 107, 0.10),
+       -3px -3px 8px var(--shadow-light);
+}
+
+.nav-item:hover svg { opacity: 1; }
+
+.nav-item.active {
+    background: var(--color-slate);
+    color: var(--color-white);
+    box-shadow:
+        5px 5px 12px rgba(93, 107, 107, 0.30),
+       -3px -3px 10px var(--shadow-light);
+}
+
+.nav-item.active svg { opacity: 1; }
+
+/* ----- Sidebar footer ----- */
+
+.sidebar-footer {
+    border-top: 1px solid var(--color-pale);
+    padding-top: 18px;
+    margin-top: 18px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px 14px;
+}
+
+.user-info strong {
+    font-family: var(--font-base);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-slate);
+    text-transform: capitalize;
+}
+
+.user-info span {
+    font-family: var(--font-base);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    color: var(--color-grey);
+    text-transform: capitalize;
+    margin-top: 3px;
+}
+
+.btn-logout {
+    width: 100%;
+    padding: 11px;
+    background: var(--color-white);
+    color: var(--color-slate);
+    border: none;
+    border-radius: 12px;
+
+    font-family: var(--font-button-family);
+    font-size: var(--font-button-size);
+    font-weight: var(--font-button-weight);
+    letter-spacing: var(--font-button-spacing);
+    text-transform: var(--font-button-transform);
+
+    cursor: pointer;
+    box-shadow:
+        4px 4px 10px rgba(93, 107, 107, 0.10),
+       -3px -3px 8px var(--shadow-light);
+    transition: box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.btn-logout:hover {
+    background: var(--color-pink);
+    color: #7a3b3a;
+}
+
+.btn-logout:active {
+    transform: translateY(1px);
+    box-shadow:
+        inset 3px 3px 8px rgba(122, 59, 58, 0.20),
+        inset -2px -2px 6px var(--shadow-light);
+}
+
+/* ============================================
+   Main content — offset to make room for the fixed sidebar
+   ============================================ */
+
+.main {
+    margin-left: var(--sidebar-width);
+    padding: 36px 44px;
+    min-height: 100vh;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-family: var(--font-base);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: var(--color-slate);
+    text-transform: capitalize;
+}
+
+.page-header p {
+    font-family: var(--font-base);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-slate);
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+/* ============================================
+   Stats cards
+   ============================================ */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 22px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: var(--color-white);
+    border-radius: 18px;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow:
+        10px 10px 24px var(--shadow-dark),
+       -10px -10px 24px var(--shadow-light);
+}
+
+.stat-label {
+    font-family: var(--font-base);
+    font-size: var(--font-card-label-size);
+    font-weight: var(--font-card-label-weight);
+    letter-spacing: var(--font-card-label-spacing);
+    text-transform: var(--font-card-label-transform);
+    color: var(--color-grey);
+}
+
+.stat-value {
+    font-family: var(--font-base);
+    font-size: var(--font-card-value-size);
+    font-weight: var(--font-card-value-weight);
+    color: var(--color-slate);
+    line-height: 1;
+}
+
+.stat-card.warn   { background: #FCF6E9; }
+.stat-card.danger { background: #FBECEB; }
+
+/* ============================================
+   Panels
+   ============================================ */
+
+.panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.panel {
+    background: var(--color-white);
+    border-radius: 18px;
+    padding: 24px 26px;
+    box-shadow:
+        10px 10px 24px var(--shadow-dark),
+       -10px -10px 24px var(--shadow-light);
+}
+
+.panel h3 {
+    font-family: var(--font-base);
+    font-size: var(--font-card-heading-size);
+    font-weight: var(--font-card-heading-weight);
+    letter-spacing: var(--font-card-heading-spacing);
+    text-transform: var(--font-card-heading-transform);
+    color: var(--color-slate);
+    margin-bottom: 16px;
+}
+
+.panel .empty {
+    font-family: var(--font-base);
+    font-size: var(--font-card-body-size);
+    font-weight: var(--font-card-body-weight);
+    color: var(--color-grey);
+    padding: 14px 0;
+    font-style: italic;
+}
+
+/* ============================================
+   Responsive — sidebar stays fixed, just gets narrower
+   ============================================ */
+
+@media (max-width: 900px) {
+    :root {
+        --sidebar-width: 220px;
+    }
+
+    .main {
+        padding: 24px 22px;
+    }
+
+    .panels {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --sidebar-width: 72px;
+    }
+
+    /* Hide text labels, keep only icons */
+    .sidebar .brand span,
+    .sidebar .brand h2,
+    .sidebar .nav-item span,
+    .sidebar .user-info {
+        display: none;
+    }
+
+    .sidebar {
+        padding: 18px 10px;
+        align-items: center;
+    }
+
+    .sidebar .brand {
+        border-bottom: 1px solid var(--color-pale);
+        padding: 0 0 14px;
+        margin-bottom: 14px;
+        width: 100%;
+    }
+
+    .nav {
+        width: 100%;
+        align-items: center;
+    }
+
+    .nav-item {
+        justify-content: center;
+        padding: 12px;
+    }
+
+    .nav-item svg {
+        margin: 0;
+    }
+
+    .sidebar-footer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: 14px;
+        margin-top: 14px;
+    }
+
+    .btn-logout {
+        padding: 10px;
+        font-size: 0;
+        position: relative;
+    }
+
+    .btn-logout::after {
+        content: "[→";
+        font-size: 14px;
+    }
+
+    .main {
+        padding: 20px 16px;
+    }
+}
+
+/* ============================================
+   Dashboard — Alert lists (Expiring / Expired)
+   ============================================ */
+
+.alert-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.alert-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: var(--color-cream);
+    transition: background 0.15s ease;
+}
+
+.alert-item:hover {
+    background: var(--color-pale);
+}
+
+.alert-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    flex: 1;
+}
+
+.alert-name {
+    font-family: var(--font-base);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-slate);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.alert-name:hover {
+    text-decoration: underline;
+}
+
+.alert-meta {
+    font-family: var(--font-base);
+    font-size: 11px;
+    color: var(--color-grey);
+    letter-spacing: 0.2px;
+}
+
+/* Days badge on dashboard lists */
+.days-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.days-active  { background: #E8F0E8; color: #4a6b4a; }
+.days-warn    { background: #FCF6E9; color: #8a6d2b; }
+.days-danger  { background: #FBECEB; color: #a85654; }
+.days-expired { background: var(--color-pale); color: var(--color-slate); }
+
+/* ============================================
+   Layout: main area + topbar
+   ============================================ */
+
+.main-area {
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+}
+
+/* The main content no longer needs margin — the wrapper has it */
+.main-area .main {
+    margin-left: 0;
+}
+
+/* ============================================
+   Topbar
+   ============================================ */
+
+.topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 14px 40px;
+    gap: 16px;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* ============================================
+   Bell
+   ============================================ */
+
+.bell-wrapper {
+    position: relative;
+}
+
+.bell-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-white);
+    border: 1px solid var(--color-pale);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-slate);
+    transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    box-shadow:
+        4px 4px 10px rgba(93, 107, 107, 0.08),
+       -3px -3px 8px var(--shadow-light);
+}
+
+.bell-btn:hover {
+    background: var(--color-cream);
+    transform: translateY(-1px);
+    box-shadow:
+        6px 6px 14px rgba(93, 107, 107, 0.12),
+       -4px -4px 10px var(--shadow-light);
+}
+
+.bell-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Red dot */
+.bell-dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #c9706c;
+    border: 2px solid var(--color-white);
+    box-shadow: 0 0 0 1px rgba(201, 112, 108, 0.4);
+}
+
+/* ============================================
+   Bell dropdown
+   ============================================ */
+
+.bell-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 340px;
+    max-height: 400px;
+    overflow-y: auto;
+
+    background: var(--color-white);
+    border-radius: 16px;
+    border: 1px solid var(--color-pale);
+
+    box-shadow:
+        12px 12px 28px rgba(93, 107, 107, 0.15),
+       -8px -8px 20px var(--shadow-light);
+
+    z-index: 1000;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
+}
+
+.bell-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.bell-dropdown-header {
+    padding: 14px 18px;
+    font-family: var(--font-base);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-grey);
+    border-bottom: 1px solid var(--color-pale);
+    position: sticky;
+    top: 0;
+    background: var(--color-white);
+    z-index: 1;
+}
+
+.bell-list {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+}
+
+.bell-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    padding: 11px 18px;
+    text-decoration: none;
+    color: var(--color-slate);
+    transition: background 0.12s ease;
+}
+
+.bell-item:hover {
+    background: var(--color-cream);
+}
+
+.bell-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    flex: 1;
+}
+
+.bell-item-name {
+    font-family: var(--font-base);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-slate);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.bell-item-meta {
+    font-family: var(--font-base);
+    font-size: 11px;
+    color: var(--color-grey);
+    letter-spacing: 0.2px;
+}
+
+.bell-item .days-badge {
+    flex-shrink: 0;
+}
+
+.bell-empty {
+    padding: 26px 18px;
+    text-align: center;
+    font-family: var(--font-base);
+    font-size: 13px;
+    color: var(--color-grey);
+    font-style: italic;
+}
+
+/* ============================================
+   Avatar (profile icon)
+   ============================================ */
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-slate);
+    color: var(--color-white);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--font-base);
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+
+    box-shadow:
+        4px 4px 10px rgba(93, 107, 107, 0.25),
+       -3px -3px 8px var(--shadow-light);
+
+    transition: transform 0.1s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.avatar:hover {
+    background: #4a5656;
+    transform: translateY(-1px);
+    box-shadow:
+        6px 6px 14px rgba(93, 107, 107, 0.30),
+       -4px -4px 10px var(--shadow-light);
+}
+
+.avatar:active {
+    transform: translateY(0);
+    box-shadow:
+        inset 3px 3px 8px rgba(0, 0, 0, 0.25),
+        inset -2px -2px 6px rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   Days badge (used in bell dropdown)
+   ============================================ */
+
+.bell-dropdown .days-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 7px;
+    font-family: var(--font-base);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.bell-dropdown .days-active  { background: #E8F0E8; color: #4a6b4a; }
+.bell-dropdown .days-warn    { background: #FCF6E9; color: #8a6d2b; }
+.bell-dropdown .days-danger  { background: #FBECEB; color: #a85654; }
+.bell-dropdown .days-expired { background: var(--color-pale); color: var(--color-slate); }
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 900px) {
+    .topbar {
+        padding: 12px 22px;
+    }
+
+    .bell-dropdown {
+        width: 300px;
+    }
+}
+
+/* ============================================
+   Bell item — read state (dimmed)
+   ============================================ */
+
+.bell-item.read {
+    opacity: 0.4;
+}
+
+.bell-item.read .bell-item-name {
+    font-weight: 500;
+}
+
+.bell-item.read .days-badge {
+    opacity: 0.85;
+}
+
+.bell-item.read:hover {
+    opacity: 0.75;
+}

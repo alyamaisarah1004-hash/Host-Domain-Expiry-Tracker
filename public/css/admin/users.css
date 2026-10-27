@@ -1,0 +1,481 @@
+/* ============================================
+   Admin / Users Page
+   Cal Studio Expiry Tracker
+   ============================================ */
+
+.page-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* ---------- Data table ---------- */
+
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: var(--font-base);
+    font-size: 14px;
+}
+
+.data-table thead th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: capitalize;
+    color: var(--color-grey);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-pale);
+}
+
+.data-table tbody td {
+    padding: 14px;
+    border-bottom: 1px solid var(--color-pale);
+    color: var(--color-slate);
+    vertical-align: middle;
+}
+
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr:hover { background: var(--color-cream); }
+
+.col-status  { width: 1%; white-space: nowrap; }
+.col-actions { width: 1%; white-space: nowrap; }
+
+.actions { white-space: nowrap; }
+
+.inline-form { display: inline; margin: 0; }
+
+/* ---------- Badge ---------- */
+
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+}
+
+.badge-active   { background: #E8F0E8; color: #4a6b4a; }
+.badge-inactive { background: var(--color-pale); color: var(--color-slate); }
+
+/* ============================================
+   Toggle switch
+   ============================================ */
+
+.toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.toggle-track {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+    background: var(--color-pale);
+    border-radius: 999px;
+    transition: background 0.2s ease;
+    box-shadow:
+        inset 2px 2px 5px rgba(93, 107, 107, 0.15),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.9);
+}
+
+.toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    background: var(--color-white);
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+    box-shadow: 2px 2px 4px rgba(93, 107, 107, 0.25);
+}
+
+.toggle-input:checked + .toggle-track {
+    background: #7ab88b;
+}
+
+.toggle-input:checked + .toggle-track .toggle-thumb {
+    transform: translateX(18px);
+}
+
+.toggle-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: var(--color-grey);
+    min-width: 60px;
+}
+
+.toggle-input:checked ~ .toggle-label {
+    color: #4a6b4a;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+.btn-primary,
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: var(--font-button-family);
+    font-size: var(--font-button-size);
+    font-weight: var(--font-button-weight);
+    letter-spacing: var(--font-button-spacing);
+    text-transform: var(--font-button-transform);
+    cursor: pointer;
+    border: none;
+    transition: box-shadow 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.btn-primary {
+    background: var(--color-slate);
+    color: var(--color-white);
+    box-shadow:
+        5px 5px 12px rgba(93, 107, 107, 0.28),
+       -4px -4px 10px var(--shadow-light);
+}
+
+.btn-primary:hover { background: #4a5656; }
+
+.btn-primary:active {
+    transform: translateY(1px);
+    box-shadow:
+        inset 3px 3px 8px rgba(0, 0, 0, 0.25),
+        inset -2px -2px 6px rgba(255, 255, 255, 0.05);
+}
+
+.btn-secondary {
+    background: var(--color-white);
+    color: var(--color-slate);
+    box-shadow:
+        4px 4px 10px rgba(93, 107, 107, 0.10),
+       -3px -3px 8px var(--shadow-light);
+}
+
+.btn-secondary:hover { background: var(--color-cream); }
+
+.btn-danger-solid {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: none;
+    font-family: var(--font-button-family);
+    font-size: var(--font-button-size);
+    font-weight: var(--font-button-weight);
+    letter-spacing: var(--font-button-spacing);
+    text-transform: var(--font-button-transform);
+    cursor: pointer;
+    color: var(--color-white);
+    background: #c9706c;
+    box-shadow: 4px 4px 10px rgba(168, 86, 84, 0.30);
+    transition: box-shadow 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.btn-danger-solid:hover { background: #a85654; }
+
+.btn-sm {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    font-family: var(--font-button-family);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin-right: 4px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-edit  { background: var(--color-pale); color: var(--color-slate); }
+.btn-edit:hover  { background: var(--color-teal); color: var(--color-white); }
+
+.btn-reset { background: #EDE7F3; color: #6b4a8f; }
+.btn-reset:hover { background: #6b4a8f; color: var(--color-white); }
+
+.muted { color: var(--color-grey); }
+
+/* ============================================
+   Alerts
+   ============================================ */
+
+.alert-success,
+.alert-error {
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+.alert-success {
+    background: #E8F0E8;
+    color: #4a6b4a;
+    border-left: 4px solid #7ab88b;
+}
+
+.alert-error {
+    background: var(--color-pink);
+    color: #7a3b3a;
+    border-left: 4px solid #c9706c;
+}
+
+/* ============================================
+   Modals
+   ============================================ */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(93, 107, 107, 0.35);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 999;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+    background: var(--color-white);
+    border-radius: 20px;
+    padding: 28px 30px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow:
+        16px 16px 36px rgba(93, 107, 107, 0.25),
+       -10px -10px 30px rgba(255, 255, 255, 0.5);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h3 {
+    font-family: var(--font-base);
+    font-size: var(--font-card-heading-size);
+    font-weight: var(--font-card-heading-weight);
+    letter-spacing: var(--font-card-heading-spacing);
+    text-transform: var(--font-card-heading-transform);
+    color: var(--color-slate);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--color-grey);
+    padding: 4px;
+    line-height: 1;
+}
+
+.modal-close:hover { color: var(--color-slate); }
+
+.modal-text {
+    font-family: var(--font-base);
+    font-size: 14px;
+    color: var(--color-slate);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.modal-text strong { color: var(--color-slate); font-weight: 700; }
+
+/* ---------- Form fields inside modal ---------- */
+
+.form-group { margin-bottom: 16px; }
+
+.form-group label {
+    display: block;
+    font-family: var(--font-base);
+    font-size: var(--font-card-label-size);
+    font-weight: var(--font-card-label-weight);
+    letter-spacing: var(--font-card-label-spacing);
+    text-transform: var(--font-card-label-transform);
+    color: var(--color-slate);
+    margin-bottom: 6px;
+}
+
+.input-shell {
+    display: flex;
+    align-items: center;
+    background: var(--color-cream);
+    border-radius: 12px;
+    padding: 4px 12px;
+    box-shadow:
+        inset 3px 3px 8px rgba(93, 107, 107, 0.12),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.95);
+    transition: box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.input-shell:focus-within {
+    background: var(--color-white);
+    box-shadow:
+        inset 3px 3px 8px rgba(93, 107, 107, 0.14),
+        inset -3px -3px 8px rgba(255, 255, 255, 1),
+        0 0 0 2px var(--color-teal);
+}
+
+.input-shell input,
+.input-shell select {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 11px 4px;
+    font-family: var(--font-base);
+    font-size: 14px;
+    color: var(--color-slate);
+    width: 100%;
+}
+
+.hint {
+    display: block;
+    font-size: 11px;
+    color: var(--color-grey);
+    margin-top: 4px;
+    padding-left: 4px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+/* ---------- Eye toggle inside input ---------- */
+
+.eye-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 6px;
+    color: var(--color-slate);
+    opacity: 0.55;
+    font-size: 14px;
+    line-height: 1;
+    transition: opacity 0.15s;
+}
+
+.eye-toggle:hover { opacity: 1; }
+
+/* Hide browser's native password reveal button (Edge/Chrome) */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+/* ============================================
+   Eye toggle (SVG)
+   ============================================ */
+
+.eye-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    color: var(--color-slate);
+    opacity: 0.55;
+    transition: opacity 0.15s;
+    line-height: 1;
+}
+
+.eye-toggle svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+.eye-toggle:hover { opacity: 1; }
+
+/* Hide Edge/Chrome native password reveal */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+/* ============================================
+   Floating toast notifications (top-right)
+   ============================================ */
+
+.toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    max-width: 380px;
+    padding: 14px 18px;
+    border-radius: 12px;
+
+    font-family: var(--font-base);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+
+    box-shadow:
+        8px 8px 20px rgba(93, 107, 107, 0.20),
+       -4px -4px 12px rgba(255, 255, 255, 0.6);
+
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.toast svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.toast-success {
+    background: #E8F0E8;
+    color: #4a6b4a;
+    border-left: 4px solid #7ab88b;
+}
+
+.toast-error {
+    background: #FBECEB;
+    color: #7a3b3a;
+    border-left: 4px solid #c9706c;
+}
+
+/* Fade-out state */
+.toast-hide {
+    transform: translateX(30px);
+    opacity: 0;
+}

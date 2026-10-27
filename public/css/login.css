@@ -1,0 +1,371 @@
+/* ============================================
+   Login Page — Neomorphic Theme
+   Cal Studio Expiry Tracker
+   ============================================ */
+
+:root {
+    --color-pink:   #F7CBCA;
+    --color-grey:   #C9BDBD;
+    --color-cream:  #F1F7F7;
+    --color-pale:   #D8E5E5;
+    --color-teal:   #B8D4D4;
+    --color-slate:  #5D6B6B;
+    --color-white:  #FFFFFF;
+
+    /* Paddle-pop gradient */
+    --color-bg-1:   #C8E0E0;
+    --color-bg-2:   #F5C9C7;
+    --color-bg-3:   #D9E8E8;
+
+    --shadow-light: rgba(255, 255, 255, 0.95);
+    --shadow-dark:  rgba(93, 107, 107, 0.18);
+
+    /* ---------- Font tokens (match dashboard) ---------- */
+    --font-base: 'Segoe UI', Tahoma, sans-serif;
+
+    /* buttons & interactive — Capitalize */
+    --font-button-family:     var(--font-base);
+    --font-button-weight:     600;
+    --font-button-size:       13px;
+    --font-button-spacing:    0.3px;
+    --font-button-transform:  capitalize;
+
+    /* labels — Capitalize */
+    --font-label-weight:      600;
+    --font-label-size:        11px;
+    --font-label-spacing:     0.4px;
+    --font-label-transform:   capitalize;
+
+    /* input text */
+    --font-input-size:        14px;
+    --font-input-weight:      400;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
+   Background (paddle-pop gradient)
+   ============================================ */
+
+body {
+    font-family: var(--font-base);
+    color: var(--color-slate);
+    min-height: 100vh;
+
+    background: linear-gradient(
+        135deg,
+        var(--color-bg-2) 0%,
+        var(--color-bg-3) 50%,
+        var(--color-bg-1) 100%
+    );
+    background-attachment: fixed;
+}
+
+/* ============================================
+   Layout
+   ============================================ */
+
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+}
+
+/* ============================================
+   Card
+   ============================================ */
+
+.login-card {
+    background: var(--color-white);
+    border-radius: 24px;
+    padding: 44px 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow:
+        16px 16px 36px var(--shadow-dark),
+       -16px -16px 36px var(--shadow-light);
+}
+
+/* ============================================
+   Brand
+   ============================================ */
+
+.login-brand {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.login-brand h1 {
+    font-family: var(--font-base);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: var(--color-slate);
+    text-transform: capitalize;
+}
+
+.login-brand p {
+    font-family: var(--font-base);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    color: var(--color-grey);
+    text-transform: capitalize;
+    margin-top: 6px;
+}
+
+/* ============================================
+   Form fields
+   ============================================ */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-family: var(--font-base);
+    font-size: var(--font-label-size);
+    font-weight: var(--font-label-weight);
+    letter-spacing: var(--font-label-spacing);
+    text-transform: var(--font-label-transform);
+    color: var(--color-slate);
+    margin-bottom: 8px;
+}
+
+.input-shell {
+    display: flex;
+    align-items: center;
+    background: var(--color-cream);
+    border-radius: 14px;
+    padding: 4px 14px;
+    box-shadow:
+        inset 4px 4px 10px rgba(93, 107, 107, 0.12),
+        inset -4px -4px 10px var(--shadow-light);
+    transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.input-shell:focus-within {
+    background: var(--color-white);
+    box-shadow:
+        inset 4px 4px 10px rgba(93, 107, 107, 0.14),
+        inset -4px -4px 10px var(--shadow-light),
+        0 0 0 2px var(--color-teal);
+}
+
+.input-shell input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 13px 4px;
+    font-family: var(--font-base);
+    font-size: var(--font-input-size);
+    font-weight: var(--font-input-weight);
+    color: var(--color-slate);
+}
+
+.input-shell input::placeholder {
+    color: var(--color-grey);
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* ============================================
+   Eye toggle
+   ============================================ */
+
+.eye-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    margin-left: 4px;
+    color: var(--color-slate);
+    opacity: 0.55;
+    line-height: 1;
+    transition: opacity 0.15s;
+    user-select: none;
+}
+
+.eye-toggle svg { display: block; }
+.eye-toggle:hover { opacity: 1; }
+
+/* ============================================
+   Primary button
+   ============================================ */
+
+.btn-primary {
+    width: 100%;
+    padding: 15px;
+    background: var(--color-slate);
+    color: var(--color-white);
+    border: none;
+    border-radius: 14px;
+
+    font-family: var(--font-button-family);
+    font-size: var(--font-button-size);
+    font-weight: var(--font-button-weight);
+    letter-spacing: var(--font-button-spacing);
+    text-transform: var(--font-button-transform);
+
+    cursor: pointer;
+    margin-top: 10px;
+
+    box-shadow:
+        8px 8px 18px rgba(93, 107, 107, 0.32),
+       -6px -6px 14px var(--shadow-light);
+
+    transition: transform 0.1s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn-primary:hover {
+    background: #4a5656;
+    box-shadow:
+        6px 6px 14px rgba(93, 107, 107, 0.36),
+       -4px -4px 10px var(--shadow-light);
+}
+
+.btn-primary:active {
+    transform: translateY(2px);
+    box-shadow:
+        inset 5px 5px 12px rgba(0, 0, 0, 0.30),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.10);
+}
+
+/* ============================================
+   Alerts
+   ============================================ */
+
+.alert-error {
+    background: var(--color-pink);
+    color: #7a3b3a;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-family: var(--font-base);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    box-shadow:
+        inset 3px 3px 8px rgba(122, 59, 58, 0.18),
+        inset -2px -2px 6px rgba(255, 255, 255, 0.7);
+}
+
+.field-error {
+    color: #a85654;
+    font-family: var(--font-base);
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 6px;
+    padding-left: 4px;
+}
+
+/* Hide browser's native password reveal button (Edge/Chrome) */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+/* ============================================
+   Floating toast (top-right)
+   ============================================ */
+
+.toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    max-width: 380px;
+    padding: 14px 18px;
+    border-radius: 12px;
+
+    font-family: var(--font-base);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+
+    box-shadow:
+        8px 8px 20px rgba(93, 107, 107, 0.20),
+       -4px -4px 12px rgba(255, 255, 255, 0.6);
+
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.toast svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.toast-error {
+    background: #FBECEB;
+    color: #7a3b3a;
+    border-left: 4px solid #c9706c;
+}
+
+.toast-hide {
+    transform: translateX(30px);
+    opacity: 0;
+}
+
+/* ============================================
+   Eye toggle (SVG)
+   ============================================ */
+
+.eye-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    color: var(--color-slate);
+    opacity: 0.55;
+    transition: opacity 0.15s;
+    line-height: 1;
+}
+
+.eye-toggle svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+.eye-toggle:hover { opacity: 1; }
+
+/* Hide browser's native password reveal */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+/* ============================================
+   Field errors (inline)
+   ============================================ */
+
+.field-error {
+    color: #a85654;
+    font-family: var(--font-base);
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 6px;
+    padding-left: 4px;
+}

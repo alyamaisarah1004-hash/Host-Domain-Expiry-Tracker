@@ -1,0 +1,728 @@
+/* ============================================
+   Domains Page — Cal Studio Expiry Tracker
+   ============================================ */
+
+/* ============================================
+   Page header with button
+   ============================================ */
+
+.page-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* ============================================
+   Filters bar
+   ============================================ */
+
+.filters-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+/* ---------- Status tabs ---------- */
+
+.status-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.status-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 12px;
+    background: var(--color-white);
+    color: var(--color-slate);
+    text-decoration: none;
+    font-family: var(--font-button-family);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    box-shadow:
+        4px 4px 10px rgba(93, 107, 107, 0.08),
+       -3px -3px 8px var(--shadow-light);
+    transition: box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.status-tab:hover {
+    transform: translateY(-1px);
+    box-shadow:
+        6px 6px 14px rgba(93, 107, 107, 0.12),
+       -4px -4px 10px var(--shadow-light);
+}
+
+.status-tab.active {
+    background: var(--color-slate);
+    color: var(--color-white);
+    box-shadow:
+        inset 3px 3px 8px rgba(0, 0, 0, 0.18),
+        inset -2px -2px 6px rgba(255, 255, 255, 0.05);
+    transform: none;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.dot-green  { background: #7ab88b; }
+.dot-yellow { background: #e2b93b; }
+.dot-red    { background: #c9706c; }
+.dot-grey   { background: #b5b5b5; }
+
+.tab-count {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--color-pale);
+    color: var(--color-slate);
+    letter-spacing: 0;
+}
+
+.status-tab.active .tab-count {
+    background: rgba(255, 255, 255, 0.25);
+    color: var(--color-white);
+}
+
+/* ---------- Search box ---------- */
+
+.search-form {
+    max-width: 100%;
+}
+
+.search-shell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-cream);
+    border-radius: 12px;
+    padding: 4px 14px;
+    box-shadow:
+        inset 3px 3px 8px rgba(93, 107, 107, 0.12),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.95);
+    transition: box-shadow 0.15s ease, background 0.15s ease;
+    max-width: 480px;
+}
+
+.search-shell:focus-within {
+    background: var(--color-white);
+    box-shadow:
+        inset 3px 3px 8px rgba(93, 107, 107, 0.14),
+        inset -3px -3px 8px rgba(255, 255, 255, 1),
+        0 0 0 2px var(--color-teal);
+}
+
+.search-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--color-grey);
+    flex-shrink: 0;
+}
+
+.search-shell input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 11px 0;
+    font-family: var(--font-base);
+    font-size: 14px;
+    color: var(--color-slate);
+    width: 100%;
+}
+
+.search-shell input::placeholder {
+    color: var(--color-grey);
+    font-style: italic;
+}
+
+.search-clear {
+    display: flex;
+    align-items: center;
+    color: var(--color-grey);
+    padding: 4px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.search-clear:hover {
+    color: var(--color-slate);
+    background: var(--color-pale);
+}
+
+.search-clear svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* ============================================
+   Data table
+   ============================================ */
+
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: var(--font-base);
+    font-size: 14px;
+}
+
+.data-table thead th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: capitalize;
+    color: var(--color-grey);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-pale);
+    white-space: nowrap;
+}
+
+.data-table tbody td {
+    padding: 14px;
+    border-bottom: 1px solid var(--color-pale);
+    color: var(--color-slate);
+    vertical-align: middle;
+}
+
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr:hover { background: var(--color-cream); }
+
+.col-days    { width: 1%; white-space: nowrap; }
+.col-actions { width: 1%; white-space: nowrap; }
+
+.actions { white-space: nowrap; }
+
+/* ============================================
+   Link style
+   ============================================ */
+
+.link {
+    color: var(--color-slate);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--color-grey);
+    transition: color 0.15s, border-color 0.15s;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.link:hover {
+    color: #4a5656;
+    border-bottom-color: var(--color-slate);
+}
+
+/* ============================================
+   Days-left badge
+   ============================================ */
+
+.days-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.days-active  { background: #E8F0E8; color: #4a6b4a; }
+.days-warn    { background: #FCF6E9; color: #8a6d2b; }
+.days-danger  { background: #FBECEB; color: #a85654; }
+.days-expired { background: var(--color-pale); color: var(--color-slate); }
+
+/* ============================================
+   Small badges
+   ============================================ */
+
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+}
+
+.badge-active   { background: #E8F0E8; color: #4a6b4a; }
+.badge-inactive { background: var(--color-pale); color: var(--color-slate); }
+
+.muted { color: var(--color-grey); }
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+.btn-primary,
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: var(--font-button-family);
+    font-size: var(--font-button-size);
+    font-weight: var(--font-button-weight);
+    letter-spacing: var(--font-button-spacing);
+    text-transform: var(--font-button-transform);
+    cursor: pointer;
+    border: none;
+    transition: box-shadow 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.btn-primary {
+    background: var(--color-slate);
+    color: var(--color-white);
+    box-shadow:
+        5px 5px 12px rgba(93, 107, 107, 0.28),
+       -4px -4px 10px var(--shadow-light);
+}
+
+.btn-primary:hover { background: #4a5656; }
+
+.btn-primary:active {
+    transform: translateY(1px);
+    box-shadow:
+        inset 3px 3px 8px rgba(0, 0, 0, 0.25),
+        inset -2px -2px 6px rgba(255, 255, 255, 0.05);
+}
+
+.btn-secondary {
+    background: var(--color-white);
+    color: var(--color-slate);
+    box-shadow:
+        4px 4px 10px rgba(93, 107, 107, 0.10),
+       -3px -3px 8px var(--shadow-light);
+}
+
+.btn-secondary:hover { background: var(--color-cream); }
+
+.btn-danger-solid {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: none;
+    font-family: var(--font-button-family);
+    font-size: var(--font-button-size);
+    font-weight: var(--font-button-weight);
+    letter-spacing: var(--font-button-spacing);
+    text-transform: var(--font-button-transform);
+    cursor: pointer;
+    color: var(--color-white);
+    background: #c9706c;
+    box-shadow: 4px 4px 10px rgba(168, 86, 84, 0.30);
+    transition: box-shadow 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.btn-danger-solid:hover { background: #a85654; }
+
+.btn-sm {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    font-family: var(--font-button-family);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin-right: 4px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-view {
+    background: var(--color-cream);
+    color: var(--color-slate);
+    border: 1px solid var(--color-pale);
+}
+
+.btn-view:hover {
+    background: var(--color-teal);
+    color: var(--color-white);
+    border-color: var(--color-teal);
+}
+
+.btn-edit { background: var(--color-pale); color: var(--color-slate); }
+.btn-edit:hover { background: var(--color-teal); color: var(--color-white); }
+
+.btn-danger { background: #FBECEB; color: #a85654; }
+.btn-danger:hover { background: #a85654; color: var(--color-white); }
+
+/* ============================================
+   Alerts (toast top-right)
+   ============================================ */
+
+.toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    max-width: 380px;
+    padding: 14px 18px;
+    border-radius: 12px;
+
+    font-family: var(--font-base);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+
+    box-shadow:
+        8px 8px 20px rgba(93, 107, 107, 0.20),
+       -4px -4px 12px rgba(255, 255, 255, 0.6);
+
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.toast svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.toast-success {
+    background: #E8F0E8;
+    color: #4a6b4a;
+    border-left: 4px solid #7ab88b;
+}
+
+.toast-error {
+    background: #FBECEB;
+    color: #7a3b3a;
+    border-left: 4px solid #c9706c;
+}
+
+.toast-hide {
+    transform: translateX(30px);
+    opacity: 0;
+}
+
+/* ============================================
+   Modals
+   ============================================ */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(93, 107, 107, 0.35);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+    background: var(--color-white);
+    border-radius: 20px;
+    padding: 28px 30px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow:
+        16px 16px 36px rgba(93, 107, 107, 0.25),
+       -10px -10px 30px rgba(255, 255, 255, 0.5);
+    margin: auto;
+}
+
+.modal-box-wide {
+    max-width: 680px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h3 {
+    font-family: var(--font-base);
+    font-size: var(--font-card-heading-size);
+    font-weight: var(--font-card-heading-weight);
+    letter-spacing: var(--font-card-heading-spacing);
+    text-transform: var(--font-card-heading-transform);
+    color: var(--color-slate);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-grey);
+    padding: 4px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.modal-close svg {
+    width: 18px;
+    height: 18px;
+}
+
+.modal-close:hover { color: var(--color-slate); }
+
+.modal-text {
+    font-family: var(--font-base);
+    font-size: 14px;
+    color: var(--color-slate);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.modal-text strong { color: var(--color-slate); font-weight: 700; }
+
+/* ============================================
+   View Domain Modal — 3-column grid
+   ============================================ */
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 22px 28px;
+    margin-bottom: 8px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.detail-item-full {
+    grid-column: 1 / -1;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-pale);
+    margin-top: 4px;
+}
+
+.detail-label {
+    font-family: var(--font-base);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: capitalize;
+    color: var(--color-grey);
+}
+
+.detail-value {
+    font-family: var(--font-base);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-slate);
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.detail-notes {
+    white-space: pre-wrap;
+    font-weight: 400;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+@media (max-width: 700px) {
+    .detail-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   Form fields inside modal
+   ============================================ */
+
+.form-group { margin-bottom: 16px; }
+
+.form-group label {
+    display: block;
+    font-family: var(--font-base);
+    font-size: var(--font-card-label-size);
+    font-weight: var(--font-card-label-weight);
+    letter-spacing: var(--font-card-label-spacing);
+    text-transform: var(--font-card-label-transform);
+    color: var(--color-slate);
+    margin-bottom: 6px;
+}
+
+.input-shell {
+    display: flex;
+    align-items: center;
+    background: var(--color-cream);
+    border-radius: 12px;
+    padding: 4px 12px;
+    box-shadow:
+        inset 3px 3px 8px rgba(93, 107, 107, 0.12),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.95);
+    transition: box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.input-shell:focus-within {
+    background: var(--color-white);
+    box-shadow:
+        inset 3px 3px 8px rgba(93, 107, 107, 0.14),
+        inset -3px -3px 8px rgba(255, 255, 255, 1),
+        0 0 0 2px var(--color-teal);
+}
+
+.input-shell input,
+.input-shell select,
+.input-shell textarea {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 11px 4px;
+    font-family: var(--font-base);
+    font-size: 14px;
+    color: var(--color-slate);
+    width: 100%;
+    resize: vertical;
+}
+
+.input-shell textarea {
+    min-height: 70px;
+    padding-top: 12px;
+}
+
+/* ============================================
+   Checkbox group (Auto-renew)
+   ============================================ */
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    font-family: var(--font-base);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-slate);
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: var(--color-cream);
+    box-shadow:
+        inset 3px 3px 8px rgba(93, 107, 107, 0.10),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.95);
+    transition: background 0.15s ease;
+}
+
+.checkbox-label:hover {
+    background: var(--color-white);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-slate);
+    cursor: pointer;
+    margin: 0;
+}
+
+.checkbox-label span {
+    text-transform: capitalize;
+}
+
+/* ============================================
+   Modal actions
+   ============================================ */
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+/* ============================================
+   Empty state
+   ============================================ */
+
+.empty {
+    text-align: center;
+    color: var(--color-grey);
+    font-style: italic;
+    padding: 30px 0 !important;
+}
+
+/* ============================================
+   Prevent table content overflow
+   ============================================ */
+
+.data-table {
+    table-layout: fixed;
+}
+
+.data-table th,
+.data-table td {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    min-width: 0;
+}
+
+.data-table td strong {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Days Left column — wide enough for "Expired 10 days ago" */
+.data-table .col-days {
+    width: 130px;
+    min-width: 130px;
+}
+
+/* Allow the badge to wrap if it needs to */
+.data-table .days-badge {
+    white-space: normal;
+    text-align: center;
+    display: inline-block;
+    max-width: 100%;
+    word-break: break-word;
+}
+
+/* Actions column — keep buttons on one line */
+.data-table .col-actions {
+    width: 220px;
+}
